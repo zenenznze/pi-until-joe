@@ -134,7 +134,35 @@ const resumedMarkers = (session: FakeSession) =>
       entry.type === "custom" && entry.customType === RESUMED_ENTRY_TYPE
   );
 
-describe("pi-until across a quit and relaunch", () => {
+describe("pi-until explicit quit recovery policy", () => {
+  it("does not auto-resume after quit; /until-resume is explicit", async () => {
+    const directory = mkdtempSync(join(tmpdir(), "pi-until-explicit-resume-"));
+    tempDirectories.push(directory);
+    const session = new FakeSession();
+    const first = loadExtension(session);
+    await startFileWatch(first, session, join(directory, "never"));
+    await first.shutdown("quit");
+
+    const second = loadExtension(session);
+    live.push(second);
+    const { ctx, notify } = session.context();
+    await second.sessionStart("startup", ctx);
+
+    expect(notify).not.toHaveBeenCalled();
+    expect(await listIds(second, ctx)).toEqual([]);
+
+    const resume = second.commands.get("until-resume");
+    if (!resume) throw new Error("until-resume command was not registered");
+    await resume("", ctx);
+    expect(notify).toHaveBeenCalledWith(
+      "pi-until resumed 1 watch from the newest suspension entry",
+      "info"
+    );
+    expect(await listIds(second, ctx)).toHaveLength(1);
+  });
+});
+
+describe.skip("legacy automatic quit recovery (replaced by explicit /until-resume)", () => {
   it("writes a quit entry that names its reason and session", async () => {
     const directory = mkdtempSync(join(tmpdir(), "pi-until-restart-"));
     tempDirectories.push(directory);

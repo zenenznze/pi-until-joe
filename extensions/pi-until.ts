@@ -52,7 +52,6 @@ import {
   SUSPENDED_ENTRY_TYPE,
   newestSuspension,
   partitionResumable,
-  quitSuspensionFor,
   resumeInput,
   resumedData,
   suspendWatch,
@@ -727,9 +726,8 @@ export default function piUntil(
   };
 
   /**
-   * Resume watches from a suspension entry: automatically after `/reload` or
-   * after a quit and relaunch of the same session, or explicitly through
-   * `/until-resume`.
+   * Resume watches from a suspension entry automatically only after `/reload`.
+   * After quit/startup/resume, recovery is explicit through `/until-resume`.
    */
   const resumeWatches = (
     suspended: readonly PersistedWatch[],
@@ -1252,18 +1250,6 @@ export default function piUntil(
     if (event.reason === "reload") {
       // A reload keeps the process and session; the entry was just written.
       resumeWatches(suspendedWatchesFrom(ctx.sessionManager.getBranch()), ctx);
-    } else if (
-      (event.reason === "startup" || event.reason === "resume") &&
-      !isShortLived(ctx)
-    ) {
-      // A long-lived process opened a session file. If the process that
-      // owned it quit with watches, this process inherits them. new and fork
-      // create a different session and inherit nothing.
-      const record = quitSuspensionFor(ctx.sessionManager.getBranch(), {
-        sessionCreatedAt: ctx.sessionManager.getHeader()?.timestamp,
-        sessionId: sessionId(ctx),
-      });
-      if (record !== undefined) resumeAcrossProcesses(record, ctx, "restart");
     }
     refreshIndicator();
   });
