@@ -1,4 +1,4 @@
-# @zenenznze/pi-until
+# @leo_aifirst/pi-until
 
 Our maintained fork: https://github.com/zenenznze/pi-until-joe.
 Original upstream: https://github.com/joelhooks/pi-until; MIT attribution is retained.
@@ -35,7 +35,7 @@ A shell condition is a predicate, not a job. If the command changes the system, 
 ## Install
 
 ```bash
-pi install npm:@zenenznze/pi-until@1.0.0
+pi install npm:@leo_aifirst/pi-until@1.0.0
 ```
 
 Then restart Pi or run `/reload`.

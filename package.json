@@ -1,5 +1,5 @@
 {
-  "name": "@zenenznze/pi-until",
+  "name": "@leo_aifirst/pi-until",
   "version": "1.0.0",
   "description": "Session-scoped shell-condition watches and recurring agent follow-ups for Pi.",
   "keywords": [
