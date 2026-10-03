@@ -1,6 +1,6 @@
 {
-  "name": "@joelhooks/pi-until",
-  "version": "0.6.0",
+  "name": "@zenenznze/pi-until",
+  "version": "1.0.0",
   "description": "Session-scoped shell-condition watches and recurring agent follow-ups for Pi.",
   "keywords": [
     "async",
@@ -11,16 +11,14 @@
     "polling",
     "recurring"
   ],
-  "homepage": "https://github.com/joelhooks/pi-until#readme",
+  "homepage": "https://github.com/zenenznze/pi-until-joe#readme",
   "bugs": {
-    "url": "https://github.com/joelhooks/pi-until/issues"
+    "url": "https://github.com/zenenznze/pi-until-joe/issues"
   },
   "license": "MIT",
   "author": "Joel Hooks <joel@joelhooks.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/joelhooks/pi-until.git"
-  },
+  "publishConfig": {"access": "public", "registry": "https://registry.npmjs.org"},
+  "repository": {"type": "git", "url": "git+https://github.com/zenenznze/pi-until-joe.git"},
   "files": [
     "extensions",
     "src",

@@ -1,4 +1,8 @@
-# pi-until
+# @zenenznze/pi-until
+
+Our maintained fork: https://github.com/zenenznze/pi-until-joe.
+Original upstream: https://github.com/joelhooks/pi-until; MIT attribution is retained.
+Version 1.0.0 is being prepared; publish it before using the npm install command.
 
 A Pi extension for non-blocking shell-condition watches and recurring follow-ups owned by one live Pi session.
 
@@ -31,7 +35,7 @@ A shell condition is a predicate, not a job. If the command changes the system, 
 ## Install
 
 ```bash
-pi install git:github.com/joelhooks/pi-until@main
+pi install npm:@zenenznze/pi-until@1.0.0
 ```
 
 Then restart Pi or run `/reload`.
@@ -39,7 +43,7 @@ Then restart Pi or run `/reload`.
 For local development:
 
 ```bash
-pi install /Users/joel/Code/joelhooks/pi-until
+pi install .
 ```
 
 ## Agent tool
